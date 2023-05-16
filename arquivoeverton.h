@@ -56,10 +56,16 @@ static void arquivo_1() {
 			system("pause");
 			exit(1);
 		}
-		printf("digite uma frase: ");
-		fflush(stdin);
-		gets(frase);
-		fprintf(arq,"%s",frase);
+		op=1;
+		while(op==1) {
+			printf("digite uma frase: ");
+			fflush(stdin);
+			gets(frase);
+			fprintf(arq,"\n\n%s",frase);
+			printf("\ndeseja continua? 1- sim 2- não \n");
+			scanf("%d",&op);
+		}
+	
 		
 	}
 	fclose(arq);	
