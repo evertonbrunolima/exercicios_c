@@ -1,8 +1,12 @@
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h> //necessário para usar as funções malloc() e free()
+#include <conio.h> //para ambiente ms-dos, usa getch para efeito de pausa
 using namespace std;
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
-int main(int argc, char** argv) {
+
+void imprimir_opcoes(){
 	cout << "-----------------------------------------\n";
 	cout << "|        Bem vindo a calculadora        |\n";
 	cout << "-----------------------------------------\n";
@@ -19,12 +23,107 @@ int main(int argc, char** argv) {
 	cout << "|  0- sair                              | \n";
 	cout << "-----------------------------------------\n";
 	cout << "Digite uma opcao:";
-	int opcao;
-	cin >> opcao; 
-	switch (opcao){
-		case 
-	}
+}
 
+void somar(float *memoria,int tam){
+	float somatorio=0;
+	for (int i=0;i<tam;i++){
+		cout << memoria[i];
+		somatorio += memoria[i];
+		if (i<tam-1){
+			cout << "+";
+		}
+	}
+	cout << " = "<<somatorio<<"\n\n\n";
+}
+
+void mul(float *memoria,int tam){
+	float somatorio=0;
+	for (int i=0;i<tam;i++){
+		cout << memoria[i];
+		somatorio *= memoria[i];
+		if (i<tam-1){
+			cout << "X";
+		}
+	}
+	cout << " = "<<somatorio<<"\n\n\n";
+}
+
+
+void substrair(float *memoria,int tam){
+	float somatorio=memoria[0];
+	cout << memoria[0];
+	for (int i=1;i<tam;i++){
+		cout << memoria[i];
+		somatorio -= memoria[i];
+		if (i<tam-1){
+			cout << "-";
+		}
+	}
+	cout << " = "<<somatorio<<"\n\n\n";
+}
+
+int pegar_numeros(float *memoria){
+	int cont=0;
+	int escolha;
+	while (true){
+		cout << "\nDigite um numero: ";
+		cin >> 	memoria[cont];
+		cont++;
+		if (cont > 1){	
+			cout << "\nDeseja adicionar mais um numero? 1- Sim 2-Nao ";
+			cin >> escolha; 
+			if (escolha == 2){
+				break;
+			}
+			else {
+				memoria = (float *) realloc(memoria, cont * sizeof(float));	
+			}
+		}	
+	}
+	return cont;
+}
+
+
+void funcao_calculadora(int opcao){
+	float *memoria_calc;
+	int indice;
+	int cont=0;
+	memoria_calc = (float*) malloc(2 * sizeof(float));
+	switch (opcao){
+		case 1: 
+			cout << "Funcao soma: \n";
+			cont =pegar_numeros(memoria_calc);
+			somar(memoria_calc,cont);	
+			free(memoria_calc);
+			break;	
+			
+		case 2: 
+			cout << "Funcao substrair: \n";
+			cont =pegar_numeros(memoria_calc);
+			substrair(memoria_calc,cont);	
+			free(memoria_calc);
+			break;	
+			
+		case 3: 
+			cout << "Funcao substrair: \n";
+			cont =pegar_numeros(memoria_calc);
+			mul(memoria_calc,cont);	
+			free(memoria_calc);
+			break;	
+	}
+	
+}
+
+int main(int argc, char** argv) {
+	int opcao;
+	do {
+		imprimir_opcoes();
+		cin >> opcao; 
+		funcao_calculadora(opcao);
+	}
+	while (opcao != 0);
+	
 	
 	
 }
