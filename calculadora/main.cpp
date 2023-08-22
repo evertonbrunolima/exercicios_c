@@ -38,7 +38,7 @@ void somar(float *memoria,int tam){
 }
 
 void mul(float *memoria,int tam){
-	float somatorio=0;
+	float somatorio=1;
 	for (int i=0;i<tam;i++){
 		cout << memoria[i];
 		somatorio *= memoria[i];
@@ -53,11 +53,26 @@ void mul(float *memoria,int tam){
 void substrair(float *memoria,int tam){
 	float somatorio=memoria[0];
 	cout << memoria[0];
+	cout << "-";
 	for (int i=1;i<tam;i++){
 		cout << memoria[i];
 		somatorio -= memoria[i];
 		if (i<tam-1){
 			cout << "-";
+		}
+	}
+	cout << " = "<<somatorio<<"\n\n\n";
+}
+
+void divisao(float *memoria,int tam){
+	float somatorio=memoria[0];
+	cout << memoria[0];
+	cout << "/";
+	for (int i=1;i<tam;i++){
+		cout << memoria[i];
+		somatorio /= memoria[i];
+		if (i<tam-1){
+			cout << "/";
 		}
 	}
 	cout << " = "<<somatorio<<"\n\n\n";
@@ -94,13 +109,15 @@ void funcao_calculadora(int opcao){
 		case 1: 
 			cout << "Funcao soma: \n";
 			cont =pegar_numeros(memoria_calc);
-			somar(memoria_calc,cont);	
+			cout << "\nA soma e igual: \n";
+			somar(memoria_calc,cont);
 			free(memoria_calc);
 			break;	
 			
 		case 2: 
 			cout << "Funcao substrair: \n";
 			cont =pegar_numeros(memoria_calc);
+			cout << "\nA substracao e igual: \n";
 			substrair(memoria_calc,cont);	
 			free(memoria_calc);
 			break;	
@@ -108,9 +125,18 @@ void funcao_calculadora(int opcao){
 		case 3: 
 			cout << "Funcao substrair: \n";
 			cont =pegar_numeros(memoria_calc);
+			cout << "\nA multiplicacao e igual: \n";
 			mul(memoria_calc,cont);	
 			free(memoria_calc);
 			break;	
+			
+		case 4: 
+			cout << "Funcao dividir: \n";
+			cont =pegar_numeros(memoria_calc);
+			cout << "\nA divisao e igual: \n";
+			divisao(memoria_calc,cont);	
+			free(memoria_calc);
+			break;
 	}
 	
 }
